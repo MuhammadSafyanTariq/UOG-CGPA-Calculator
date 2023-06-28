@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes_trove/Common/Widgets/logo_widget.dart';
 import 'package:notes_trove/Common/global_variables.dart';
 import 'package:notes_trove/Screens/auth_screens/sign_up_screen.dart';
+import 'package:notes_trove/Screens/bottom_nav_bar.dart';
 import 'package:notes_trove/Screens/home_screen/home_screen.dart';
 
 import '../../Common/Widgets/custom_button.dart';
@@ -105,7 +106,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 context: context,
                 text: 'Sign in',
                 onPressed: () {
-                  Navigator.pushNamed(context, HomeScreen.routeName);
+                  Navigator.pushNamed(context, BottomNavBarScreen.routeName);
                 },
               ),
               const SizedBox(height: 18.0),

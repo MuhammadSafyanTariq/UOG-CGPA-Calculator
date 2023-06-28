@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:notes_trove/Common/Widgets/web_view_screen.dart';
+import 'package:notes_trove/Common/global_variables.dart';
+import 'package:notes_trove/Screens/notes_screen/notes_screen.dart';
 import 'package:notes_trove/utils/colors.dart';
 
 import '../../Common/Widgets/app_bar.dart';
@@ -7,7 +10,11 @@ class CourseListScreen extends StatelessWidget {
   final List<Course> courses;
 
   CourseListScreen({required this.courses});
-
+  List<Notes> notesList = [
+    Notes(url: pdfUrl, name: 'pdf 1'),
+    Notes(url: pdfUrl2, name: 'pdf 2'),
+    Notes(url: pptUrl, name: 'ppt'),
+  ];
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width / 100;
@@ -21,6 +28,11 @@ class CourseListScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 4),
         child: InkWell(
+          onTap: () => Navigator.pushNamed(
+            context,
+            CourseNotesScreen.routeName,
+            arguments: notesList,
+          ),
           child: ListView.builder(
             itemCount: courses.length,
             itemBuilder: (context, index) {

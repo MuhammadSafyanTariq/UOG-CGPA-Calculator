@@ -22,8 +22,8 @@ class HomeButtonStylish extends StatelessWidget {
     var height = MediaQuery.of(context).size.height / 100;
 
     return Container(
-      width: width * 42,
-      height: height * 22,
+      width: width * 41,
+      height: height * 18 + 30,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(corner ? 0.0 : 40),
@@ -32,6 +32,8 @@ class HomeButtonStylish extends StatelessWidget {
           bottomLeft: Radius.circular(40),
         ),
         color: myColors.primaryColor,
+        // gradient:
+        //     corner ? MyColors.primaryGradient1 : MyColors.primaryGradient2,
         boxShadow: [
           BoxShadow(
             color: Colors.grey[400]!,

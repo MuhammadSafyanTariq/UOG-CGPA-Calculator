@@ -23,6 +23,7 @@ class HomeScreen extends StatelessWidget {
     var height = MediaQuery.of(context).size.height / 100;
 
     return Scaffold(
+      // backgroundColor: MyColors(context).primaryColor10,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * 5),
         child: SingleChildScrollView(
@@ -85,15 +86,15 @@ class HomeScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  SizedBox(height: height * 3),
-                  HomeButtonSimple(
-                    title: 'Progress Tracking',
-                    icon: Icons.show_chart,
-                    corner: true,
-                    onPressed: () {
-                      // Navigate to Progress Tracking screen
-                    },
-                  ),
+                  // SizedBox(height: height * 3),
+                  // HomeButtonSimple(
+                  //   title: 'Progress Tracking',
+                  //   icon: Icons.show_chart,
+                  //   corner: true,
+                  //   onPressed: () {
+                  //     // Navigate to Progress Tracking screen
+                  //   },
+                  // ),
                   SizedBox(height: height * 3),
                   HomeButtonSimple(
                     corner: false,

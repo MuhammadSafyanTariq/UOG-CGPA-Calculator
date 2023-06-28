@@ -18,27 +18,27 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
   double calculatedCGPA = 0.0;
 
   List<String> gradeOptions = [
-    'A+ (4.00)',
-    'A (3.70)',
-    'B+ (3.40)',
-    'B (3.00)',
-    'B- (2.50)',
-    'C+ (2.00)',
-    'C (1.50)',
-    'D (1.00)',
-    'F (0.00)',
+    'A+',
+    'A',
+    'B+',
+    'B',
+    'B-',
+    'C+',
+    'C',
+    'D',
+    'F',
   ];
 
   Map<String, double> gradeValues = {
-    'A+ (4.00)': 4.00,
-    'A (3.70)': 3.70,
-    'B+ (3.40)': 3.40,
-    'B (3.00)': 3.00,
-    'B- (2.50)': 2.50,
-    'C+ (2.00)': 2.00,
-    'C (1.50)': 1.50,
-    'D (1.00)': 1.00,
-    'F (0.00)': 0.00,
+    'A+': 4.00,
+    'A': 3.70,
+    'B+': 3.40,
+    'B': 3.00,
+    'B-': 2.50,
+    'C+': 2.00,
+    'C': 1.50,
+    'D': 1.00,
+    'F': 0.00,
   };
 
   @override

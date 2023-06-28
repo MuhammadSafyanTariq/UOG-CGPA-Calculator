@@ -12,6 +12,43 @@ class MyColors {
   Color get redColor => Color.fromRGBO(252, 68, 68, 1.0);
   Color get greyColor => Color(0xFFF6F6F7);
 
+  //gradient colors:
+  static const List<Color> gradientColors1 = [
+    // Color.fromRGBO(64, 121, 160, 1),
+    // Color.fromRGBO(48, 99, 142, 1),
+    // Color.fromRGBO(0, 68, 109, 1),
+    Color.fromRGBO(0, 68, 109, 0.8),
+
+    Color.fromRGBO(0, 68, 109, 0.9),
+
+    Color.fromRGBO(0, 68, 109, 1),
+  ];
+
+  static const List<double> gradientStops1 = [0.0, 0.2, 1.0];
+
+  static const Gradient primaryGradient1 = LinearGradient(
+    colors: gradientColors1,
+    stops: gradientStops1,
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+  static const List<Color> gradientColors2 = [
+    Color.fromRGBO(0, 68, 109, 1),
+    Color.fromRGBO(0, 68, 109, 0.9),
+    Color.fromRGBO(0, 68, 109, 0.8),
+    // Color.fromRGBO(48, 99, 142, 1),
+    // Color.fromRGBO(64, 121, 160, 1),
+  ];
+
+  static const List<double> gradientStops2 = [0.0, 0.8, 1.0];
+
+  static const Gradient primaryGradient2 = LinearGradient(
+    colors: gradientColors2,
+    stops: gradientStops2,
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+
   MaterialColor get primarySwatch {
     final primaryColorValue = Color.fromRGBO(0, 68, 109, 1);
     return MaterialColor(primaryColorValue.value, <int, Color>{

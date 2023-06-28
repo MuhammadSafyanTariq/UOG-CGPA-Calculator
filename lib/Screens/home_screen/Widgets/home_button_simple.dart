@@ -22,10 +22,10 @@ class HomeButtonSimple extends StatelessWidget {
     var height = MediaQuery.of(context).size.height / 100;
 
     return Container(
-      height: height * 12,
+      height: height * 11.5,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(40),
-        color: myColors.primaryColor,
+        borderRadius: BorderRadius.circular(height * 4.5),
+        color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.grey[400]!,
@@ -48,7 +48,7 @@ class HomeButtonSimple extends StatelessWidget {
                 Icon(
                   icon,
                   size: 48.0,
-                  color: Colors.white,
+                  color: Colors.black87,
                 ),
                 SizedBox(width: width * 5),
                 Text(
@@ -57,7 +57,7 @@ class HomeButtonSimple extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black87,
                   ),
                 ),
               ],

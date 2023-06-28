@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:notes_trove/Common/global_variables.dart';
 import 'package:notes_trove/Screens/CGPA_calculator/CGPA_calculator.dart';
+import 'package:notes_trove/Screens/bottom_nav_bar.dart';
+import 'package:notes_trove/Screens/chat_bot_screen/chat_screen.dart';
 import 'package:notes_trove/Screens/home_screen/home_screen.dart';
+import 'package:notes_trove/Screens/notes_screen/notes_screen.dart';
 import 'package:notes_trove/Screens/time_table_screen/time_table_screen.dart';
 import 'package:notes_trove/routes/routes.dart';
 import 'package:notes_trove/utils/colors.dart';

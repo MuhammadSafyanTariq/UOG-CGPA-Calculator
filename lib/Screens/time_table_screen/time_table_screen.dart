@@ -1,15 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:advance_pdf_viewer2/advance_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:notes_trove/Common/Widgets/app_bar.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:http/http.dart' as http;
-
-import '../../utils/colors.dart';
 
 class TimeTableScreen extends StatefulWidget {
   static const routeName = 'time-table-screen';

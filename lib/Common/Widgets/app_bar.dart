@@ -14,6 +14,7 @@ class AppBarWidget extends StatelessWidget {
     var height = MediaQuery.of(context).size.height / 100;
 
     return AppBar(
+      centerTitle: true,
       backgroundColor: myColors.primaryColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
