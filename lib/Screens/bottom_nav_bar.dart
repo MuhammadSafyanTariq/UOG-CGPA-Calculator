@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:notes_trove/Screens/activity_progress_screen/activity_progress_screen.dart';
 import 'package:notes_trove/Screens/chat_bot_screen/chat_screen.dart';
 import 'package:notes_trove/Screens/home_screen/home_screen.dart';
 import 'package:notes_trove/utils/colors.dart';
 
 List<Widget> pages = [
   HomeScreen(),
-  ChatScreen(),
-  Container(),
+  const ChatScreen(),
+  const StudyProgressScreen(),
 ];
 
 class BottomNavBarScreen extends StatefulWidget {
@@ -38,7 +39,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
         type: BottomNavigationBarType.shifting,
         onTap: onTap,
         currentIndex: currentIndex,
-        selectedItemColor: MyColors(context).primaryColor,
+        selectedItemColor: MyColors().primaryColor,
         unselectedItemColor: Colors.black38,
         showSelectedLabels: true,
         showUnselectedLabels: true,

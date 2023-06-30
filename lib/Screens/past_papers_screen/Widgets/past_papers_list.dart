@@ -3,19 +3,18 @@ import 'package:notes_trove/Common/Widgets/app_bar.dart';
 import 'package:notes_trove/Common/Widgets/web_view_screen.dart';
 import 'package:notes_trove/utils/colors.dart';
 
-class CourseNotesScreen extends StatefulWidget {
-  static const String routeName = 'course-notes-screen';
+class PastPapers extends StatefulWidget {
   final String appbarTitle;
-  final List<Notes> notes;
+  final List<Papers> notes;
 
-  const CourseNotesScreen({key, required this.notes, required this.appbarTitle})
+  const PastPapers({key, required this.notes, required this.appbarTitle})
       : super(key: key);
 
   @override
-  _CourseNotesScreenState createState() => _CourseNotesScreenState();
+  _PastPapersState createState() => _PastPapersState();
 }
 
-class _CourseNotesScreenState extends State<CourseNotesScreen> {
+class _PastPapersState extends State<PastPapers> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width / 100;
@@ -59,10 +58,10 @@ class _CourseNotesScreenState extends State<CourseNotesScreen> {
   }
 }
 
-class Notes {
+class Papers {
   String url;
   String name;
-  Notes({
+  Papers({
     required this.url,
     required this.name,
   });

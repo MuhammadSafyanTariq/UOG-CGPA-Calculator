@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'package:flutter/material.dart';
 
 import '../Common/global_variables.dart';
 import 'auth_screens/sign_in_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String routeName = '/welcome-screen';
+
+  const WelcomeScreen({super.key});
 
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
@@ -19,7 +22,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   void navigateToNextScreen() {
-    Timer(Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 2), () {
       Navigator.pushNamedAndRemoveUntil(
           context, SignInScreen.routeName, (route) => false);
     });

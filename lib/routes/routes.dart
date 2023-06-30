@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:notes_trove/Common/Widgets/web_view_screen.dart';
 import 'package:notes_trove/Screens/CGPA_calculator/CGPA_calculator.dart';
+import 'package:notes_trove/Screens/QuizReminder/reminder_screen.dart';
+import 'package:notes_trove/Screens/QuizReminder/widgets/quiz_detail_screen.dart';
+import 'package:notes_trove/Screens/all_courses_screen/all_courses_screen.dart';
 import 'package:notes_trove/Screens/bottom_nav_bar.dart';
 import 'package:notes_trove/Screens/home_screen/home_screen.dart';
 import 'package:notes_trove/Screens/notes_screen/notes_screen.dart';
+import 'package:notes_trove/Screens/past_papers_screen/past_papers_screen.dart';
 import 'package:notes_trove/Screens/time_table_screen/time_table_screen.dart';
 
 import '../Screens/auth_screens/forget_password_screen.dart';
@@ -71,12 +75,35 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       );
     case CourseNotesScreen.routeName:
       var notes = routeSettings.arguments as List<Notes>;
-
+      String appbarTitle = routeSettings.arguments as String;
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => CourseNotesScreen(
           notes: notes,
+          appbarTitle: appbarTitle,
         ),
+      );
+    case PastPapersScreen.routeName:
+      var courses = routeSettings.arguments as List<Course>;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => PastPapersScreen(
+          courses: courses,
+        ),
+      );
+    case QuizAssignmentDetailsScreen.routeName:
+      var quizAssignment = routeSettings.arguments as QuizAssignmentDetail;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => QuizAssignmentDetailsScreen(
+          quizAssignment: quizAssignment,
+        ),
+      );
+
+    case QuizAssignmentScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => QuizAssignmentScreen(),
       );
 
     default:

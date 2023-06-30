@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:notes_trove/Common/Widgets/logo_widget.dart';
-import 'package:notes_trove/Common/global_variables.dart';
 
 import '../../Common/Widgets/custom_button.dart';
 import '../../Common/Widgets/custom_textinputfeild.dart';
@@ -33,7 +32,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               SizedBox(
                 height: height * 20,
               ),
-              LogoWidget(),
+              const LogoWidget(),
               SizedBox(height: height * 5),
               Text(
                 'Reset Password',

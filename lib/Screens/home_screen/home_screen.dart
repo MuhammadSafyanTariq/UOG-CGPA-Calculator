@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:notes_trove/Common/global_variables.dart';
 import 'package:notes_trove/Screens/CGPA_calculator/CGPA_calculator.dart';
+import 'package:notes_trove/Screens/QuizReminder/reminder_screen.dart';
+import 'package:notes_trove/Screens/past_papers_screen/Widgets/past_papers_list.dart';
 import 'package:notes_trove/Screens/time_table_screen/time_table_screen.dart';
 
+import '../../utils/colors.dart';
 import '../all_courses_screen/all_courses_screen.dart';
+import '../past_papers_screen/past_papers_screen.dart';
 import 'Widgets/Home_button_stylish.dart';
 import 'Widgets/home_button_simple.dart';
 
@@ -34,11 +38,66 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: height * 7,
               ),
-              Text(
-                'Notes\nTrove',
-                style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: height * 3.5 + width * 4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Notes\nTrove',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: height * 3.5 + width * 4),
+                  ),
+                  // Column(
+                  //   children: [
+                  //     Container(
+                  //       decoration: BoxDecoration(
+                  //         color: MyColors().primaryColor10,
+                  //         borderRadius: BorderRadius.circular(10),
+                  //       ),
+                  //       child: IconButton(
+                  //         onPressed: () {},
+                  //         icon: Icon(Icons.logout),
+                  //       ),
+                  //     ),
+                  //     SizedBox(
+                  //       height: 10,
+                  //     ),
+                  //     Text(
+                  //       'Log Out',
+                  //       style: TextStyle(fontWeight: FontWeight.w500),
+                  //     ),
+                  //   ],
+                  // ),
+                  // IconButton(
+                  //   onPressed: () {
+                  //     showDialog(
+                  //       context: context,
+                  //       builder: (context) => Column(
+                  //         children: [
+                  //           TextButton(onPressed: () {}, child: Text('Log Out'))
+                  //         ],
+                  //       ),
+                  //     );
+                  //   },
+                  //   icon: Icon(Icons.more_vert),
+                  // ),
+                  PopupMenuButton<String>(
+                    icon: Icon(Icons.more_vert),
+                    onSelected: (value) {
+                      if (value == 'logout') {
+                        // Perform logout functionality here
+                      }
+                    },
+                    itemBuilder: (BuildContext context) =>
+                        <PopupMenuEntry<String>>[
+                      PopupMenuItem<String>(
+                        value: 'logout',
+                        child: Text('Log Out'),
+                      ),
+                    ],
+                  )
+                ],
               ),
               SizedBox(
                 height: height * 3,
@@ -101,7 +160,11 @@ class HomeScreen extends StatelessWidget {
                     title: 'Past Papers',
                     icon: Icons.description,
                     onPressed: () {
-                      // Navigate to Past Paper screen
+                      Navigator.pushNamed(
+                        context,
+                        PastPapersScreen.routeName,
+                        arguments: courses,
+                      );
                     },
                   ),
                   SizedBox(height: height * 3),
@@ -110,7 +173,8 @@ class HomeScreen extends StatelessWidget {
                     title: 'Reminders',
                     icon: Icons.notifications_active_outlined,
                     onPressed: () {
-                      // Navigate to Past Paper screen
+                      Navigator.pushNamed(
+                          context, QuizAssignmentScreen.routeName);
                     },
                   ),
                   SizedBox(height: height * 3),

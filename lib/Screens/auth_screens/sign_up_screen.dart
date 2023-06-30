@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:notes_trove/Common/Widgets/logo_widget.dart';
-import 'package:notes_trove/Common/global_variables.dart';
 import 'package:notes_trove/Screens/auth_screens/sign_in_screen.dart';
 
 import '../../Common/Widgets/custom_button.dart';
@@ -22,7 +21,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width / 100;
     var height = MediaQuery.of(context).size.height / 100;
-    print('height--------------->   $height');
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -32,7 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: height * 15),
-              LogoWidget(),
+              const LogoWidget(),
               SizedBox(height: height * 6),
               const Text(
                 'Create New Account',
@@ -53,7 +51,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               TextInputField(
                 context: context,
                 icon: Icons.person,
-                hintText: 'Email or phone number',
+                hintText: 'Roll Number (e.g. 21011598-XXX)',
               ),
               SizedBox(height: height * 2),
               TextInputField(

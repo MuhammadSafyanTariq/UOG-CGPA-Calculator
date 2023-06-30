@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_trove/Common/Widgets/logo_widget.dart';
-import 'package:notes_trove/Common/global_variables.dart';
 import 'package:notes_trove/Screens/auth_screens/sign_up_screen.dart';
 import 'package:notes_trove/Screens/bottom_nav_bar.dart';
-import 'package:notes_trove/Screens/home_screen/home_screen.dart';
 
 import '../../Common/Widgets/custom_button.dart';
 import '../../Common/Widgets/custom_textinputfeild.dart';
@@ -37,7 +35,7 @@ class _SignInScreenState extends State<SignInScreen> {
               SizedBox(
                 height: height * 15,
               ),
-              LogoWidget(),
+              const LogoWidget(),
               SizedBox(height: height * 6),
               Text(
                 'Welcome Back',

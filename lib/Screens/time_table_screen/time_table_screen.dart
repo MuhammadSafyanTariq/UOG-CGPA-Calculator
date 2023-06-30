@@ -3,16 +3,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:http/http.dart' as http;
 import 'package:notes_trove/Common/Widgets/app_bar.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as path_provider;
-import 'package:http/http.dart' as http;
 
 class TimeTableScreen extends StatefulWidget {
   static const routeName = 'time-table-screen';
   final String pdfUrl;
 
-  TimeTableScreen({required this.pdfUrl});
+  const TimeTableScreen({super.key, required this.pdfUrl});
 
   @override
   _TimeTableScreenState createState() => _TimeTableScreenState();
@@ -62,12 +62,12 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
 
     return Scaffold(
       appBar: PreferredSize(
-        child: AppBarWidget(title: 'My Timetable'),
         preferredSize: Size(double.infinity, height * 9),
+        child: AppBarWidget(title: 'My Timetable'),
       ),
       body: Center(
         child: isLoading
-            ? CircularProgressIndicator()
+            ? const CircularProgressIndicator()
             : localFilePath != null
                 ? PDFView(
                     filePath: localFilePath!,
@@ -85,7 +85,7 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                     },
                     onViewCreated: (PDFViewController controller) {},
                   )
-                : Text('PDF file not found.'),
+                : const Text('PDF file not found.'),
       ),
     );
   }

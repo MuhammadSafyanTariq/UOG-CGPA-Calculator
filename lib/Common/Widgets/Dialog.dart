@@ -5,8 +5,14 @@ import 'custom_button.dart';
 class DialogBox extends StatelessWidget {
   final String text;
   final String subtext;
+  final IconData icon;
+  final Color color;
 
-  DialogBox({required this.text, required this.subtext});
+  DialogBox(
+      {required this.text,
+      required this.subtext,
+      required this.icon,
+      required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +25,19 @@ class DialogBox extends StatelessWidget {
       ),
       child: Container(
         width: width * 80,
-        height: width * 55,
+        height: width * 70,
         padding: EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Icon(
+              icon,
+              size: 50,
+              color: color,
+            ),
+            SizedBox(
+              height: height * 1.5,
+            ),
             Text(
               text,
               style: TextStyle(

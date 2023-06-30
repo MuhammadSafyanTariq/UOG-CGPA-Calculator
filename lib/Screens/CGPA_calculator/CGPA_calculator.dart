@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notes_trove/Common/Widgets/Dialog.dart';
 import 'package:notes_trove/Common/Widgets/custom_button.dart';
 import 'package:notes_trove/utils/colors.dart';
 
 class CGPACalculatorScreen extends StatefulWidget {
   static const routeName = 'cgpa-clc-screen';
+
+  const CGPACalculatorScreen({super.key});
   @override
   _CGPACalculatorScreenState createState() => _CGPACalculatorScreenState();
 }
@@ -43,7 +46,7 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    MyColors myColors = MyColors(context);
+    MyColors myColors = MyColors();
 
     var width = MediaQuery.of(context).size.width / 100;
     var height = MediaQuery.of(context).size.height / 100;
@@ -51,14 +54,14 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: myColors.primaryColor,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(20),
             bottomRight: Radius.circular(20),
           ),
         ),
         elevation: 0,
-        title: Text(
+        title: const Text(
           'CGPA Calculator',
           style: TextStyle(
             color: Colors.white,
@@ -84,18 +87,18 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
                   creditHours = List<int>.filled(numOfCourses, 0);
                 });
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Number of Courses',
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: numOfCourses,
               itemBuilder: (context, index) {
                 return Container(
-                  padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
                   margin: EdgeInsets.only(bottom: height),
                   decoration: BoxDecoration(
                       color: myColors.primaryColor10,
@@ -116,12 +119,12 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
                               grades[index] = value ?? '';
                             });
                           },
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Grade',
                           ),
                         ),
                       ),
-                      SizedBox(width: 16.0),
+                      const SizedBox(width: 16.0),
                       Expanded(
                         child: TextField(
                           keyboardType: TextInputType.number,
@@ -130,7 +133,7 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
                               creditHours[index] = int.parse(value);
                             });
                           },
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Credit Hours',
                           ),
                         ),
@@ -140,7 +143,7 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
                 );
               },
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextField(
               keyboardType: TextInputType.number,
               onChanged: (value) {
@@ -148,11 +151,11 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
                   previousCGPA = double.parse(value);
                 });
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Previous CGPA',
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextField(
               keyboardType: TextInputType.number,
               onChanged: (value) {
@@ -160,11 +163,11 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
                   totalCreditHours = int.parse(value);
                 });
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Total Credit Hours',
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             CustomButton(
               text: 'Calculate CGPA',
               onPressed: () {
@@ -172,6 +175,8 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
                   showDialog(
                     context: context,
                     builder: (context) => DialogBox(
+                      icon: Icons.warning_rounded,
+                      color: Colors.red,
                       text: 'Something is missing!',
                       subtext: "Please enter the credit hours for all courses",
                     ),
@@ -182,6 +187,8 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
                   showDialog(
                     context: context,
                     builder: (context) => DialogBox(
+                      color: Colors.black,
+                      icon: FontAwesomeIcons.faceSmile,
                       text: 'Your CGPA is',
                       subtext: '$calculatedCGPA',
                     ),
@@ -190,7 +197,7 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
               },
               context: context,
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             // Row(
             //   mainAxisAlignment: MainAxisAlignment.center,
             //   children: [

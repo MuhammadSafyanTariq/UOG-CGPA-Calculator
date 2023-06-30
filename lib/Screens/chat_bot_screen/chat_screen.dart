@@ -1,6 +1,5 @@
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:notes_trove/Common/Widgets/app_bar.dart';
 import 'package:notes_trove/Screens/chat_bot_screen/threedots.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -23,15 +22,42 @@ class _ChatScreenState extends State<ChatScreen> {
   bool _isTyping = false;
 
   @override
-  void initState() {
-    chatGPT = OpenAI.instance.build(
-      token:
-          "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", // Replace with your OpenAI API key
-      baseOption: HttpSetup(
-        receiveTimeout: Duration(milliseconds: 6000),
-      ),
-    );
-    super.initState();
+  Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width / 100;
+    var height = MediaQuery.of(context).size.height / 100;
+
+    return Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size(double.infinity, height * 9),
+            child: AppBarWidget(
+              backButton: false,
+              title: 'My AI',
+            )),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Flexible(
+                  child: ListView.builder(
+                reverse: true,
+                padding: Vx.m8,
+                itemCount: _messages.length,
+                itemBuilder: (context, index) {
+                  return _messages[index];
+                },
+              )),
+              if (_isTyping) const ThreeDots(),
+              const Divider(
+                height: 1.0,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: context.cardColor,
+                ),
+                child: _buildTextComposer(),
+              )
+            ],
+          ),
+        ));
   }
 
 //api key    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
@@ -42,37 +68,16 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
-  // Link for api - https://beta.openai.com/account/api-keys
-
-  void _sendMessage() async {
-    if (_controller.text.isEmpty) return;
-    ChatMessage message = ChatMessage(
-      text: _controller.text,
-      sender: "user",
-      isImage: false,
+  @override
+  void initState() {
+    chatGPT = OpenAI.instance.build(
+      token:
+          "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", // Replace with your OpenAI API key
+      baseOption: HttpSetup(
+        receiveTimeout: const Duration(milliseconds: 6000),
+      ),
     );
-
-    setState(() {
-      _messages.insert(0, message);
-      _isTyping = true;
-    });
-
-    _controller.clear();
-
-    if (_isImageSearch) {
-      final request = GenerateImage(message.text, 1, size: "256x256");
-
-      final response = await chatGPT!.generateImage(request);
-      Vx.log(response!.data!.last!.url!);
-      insertNewData(response.data!.last!.url!, isImage: true);
-    } else {
-      final request =
-          CompleteText(prompt: message.text, model: kChatGptTurboModel);
-
-      final response = await chatGPT!.onCompletion(request: request);
-      Vx.log(response!.choices[0].text);
-      insertNewData(response.choices[0].text, isImage: false);
-    }
+    super.initState();
   }
 
   void insertNewData(String response, {bool isImage = false}) {
@@ -120,41 +125,36 @@ class _ChatScreenState extends State<ChatScreen> {
     ).px16();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width / 100;
-    var height = MediaQuery.of(context).size.height / 100;
+  // Link for api - https://beta.openai.com/account/api-keys
 
-    return Scaffold(
-        appBar: PreferredSize(
-            child: AppBarWidget(
-              title: 'Your AI',
-            ),
-            preferredSize: Size(double.infinity, height * 9)),
-        body: SafeArea(
-          child: Column(
-            children: [
-              Flexible(
-                  child: ListView.builder(
-                reverse: true,
-                padding: Vx.m8,
-                itemCount: _messages.length,
-                itemBuilder: (context, index) {
-                  return _messages[index];
-                },
-              )),
-              if (_isTyping) const ThreeDots(),
-              const Divider(
-                height: 1.0,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: context.cardColor,
-                ),
-                child: _buildTextComposer(),
-              )
-            ],
-          ),
-        ));
+  void _sendMessage() async {
+    if (_controller.text.isEmpty) return;
+    ChatMessage message = ChatMessage(
+      text: _controller.text,
+      sender: "user",
+      isImage: false,
+    );
+
+    setState(() {
+      _messages.insert(0, message);
+      _isTyping = true;
+    });
+
+    _controller.clear();
+
+    if (_isImageSearch) {
+      final request = GenerateImage(message.text, 1, size: "256x256");
+
+      final response = await chatGPT!.generateImage(request);
+      Vx.log(response!.data!.last!.url!);
+      insertNewData(response.data!.last!.url!, isImage: true);
+    } else {
+      final request =
+          CompleteText(prompt: message.text, model: kChatGptTurboModel);
+
+      final response = await chatGPT!.onCompletion(request: request);
+      Vx.log(response!.choices[0].text);
+      insertNewData(response.choices[0].text, isImage: false);
+    }
   }
 }

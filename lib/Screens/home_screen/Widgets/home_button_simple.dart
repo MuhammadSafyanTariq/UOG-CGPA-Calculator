@@ -16,7 +16,7 @@ class HomeButtonSimple extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MyColors myColors = MyColors(context);
+    MyColors myColors = MyColors();
 
     var width = MediaQuery.of(context).size.width / 100;
     var height = MediaQuery.of(context).size.height / 100;

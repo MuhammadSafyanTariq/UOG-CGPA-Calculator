@@ -4,7 +4,6 @@ import 'package:notes_trove/Screens/auth_screens/reset_password_screen.dart';
 
 import '../../Common/Widgets/custom_button.dart';
 import '../../Common/Widgets/custom_textinputfeild.dart';
-import '../../Common/global_variables.dart';
 
 class PasswordCreationScreen extends StatefulWidget {
   static const String routeName = '/password-creation-screen';
@@ -34,7 +33,7 @@ class _PasswordCreationScreenState extends State<PasswordCreationScreen> {
               SizedBox(
                 height: height * 20,
               ),
-              LogoWidget(),
+              const LogoWidget(),
               SizedBox(height: height * 5),
               Text(
                 'Password Creation',
@@ -45,7 +44,7 @@ class _PasswordCreationScreenState extends State<PasswordCreationScreen> {
               ),
               const SizedBox(height: 12.0),
               const Text(
-                'Enter the email address or mobile phone number\nassociated with your BookProsly account',
+                'Create new password',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black26,
