@@ -5,14 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:http/http.dart' as http;
 import 'package:notes_trove/Common/Widgets/app_bar.dart';
+import 'package:notes_trove/Common/global_variables.dart';
+import 'package:notes_trove/utils/colors.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as path_provider;
+import 'package:file_picker/file_picker.dart';
 
 class TimeTableScreen extends StatefulWidget {
   static const routeName = 'time-table-screen';
   final String pdfUrl;
 
-  const TimeTableScreen({super.key, required this.pdfUrl});
+  const TimeTableScreen({Key? key, required this.pdfUrl}) : super(key: key);
 
   @override
   _TimeTableScreenState createState() => _TimeTableScreenState();
@@ -55,6 +58,37 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
     }
   }
 
+  Future<void> selectAndUploadPDF() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+
+    if (result != null) {
+      String? filePath = result.files.single.path;
+      if (filePath != null) {
+        setState(() {
+          isLoading = true;
+          localFilePath = filePath;
+        });
+
+        try {
+          // Perform upload operation using the filePath
+          // ...
+          // Once upload is complete, set isLoading to false
+          setState(() {
+            isLoading = false;
+          });
+        } catch (error) {
+          setState(() {
+            isLoading = false;
+          });
+          print('Error uploading PDF: $error');
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width / 100;
@@ -87,6 +121,13 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                   )
                 : const Text('PDF file not found.'),
       ),
+      floatingActionButton: isItAdminMode
+          ? FloatingActionButton(
+              onPressed: selectAndUploadPDF,
+              child: Icon(Icons.upload_file),
+              backgroundColor: MyColors().primaryColor,
+            )
+          : null,
     );
   }
 }

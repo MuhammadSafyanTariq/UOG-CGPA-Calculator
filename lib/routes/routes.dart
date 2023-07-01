@@ -10,6 +10,7 @@ import 'package:notes_trove/Screens/notes_screen/notes_screen.dart';
 import 'package:notes_trove/Screens/past_papers_screen/past_papers_screen.dart';
 import 'package:notes_trove/Screens/time_table_screen/time_table_screen.dart';
 
+import '../Screens/QuizReminder/widgets/add_quiz_screen.dart';
 import '../Screens/auth_screens/forget_password_screen.dart';
 import '../Screens/auth_screens/password_creation_screen.dart';
 import '../Screens/auth_screens/reset_password_screen.dart';
@@ -68,10 +69,10 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       );
     case WebViewScreen.routeName:
       var url = routeSettings.arguments as String;
-
+      var title = routeSettings.arguments as String;
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => WebViewScreen(url: url),
+        builder: (_) => WebViewScreen(url: url, title: title),
       );
     case CourseNotesScreen.routeName:
       var notes = routeSettings.arguments as List<Notes>;
@@ -104,6 +105,14 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => QuizAssignmentScreen(),
+      );
+    case AddQuizAssignmentScreen.routeName:
+      var courseList = routeSettings.arguments as List<String>;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => AddQuizAssignmentScreen(
+          courses: courseList,
+        ),
       );
 
     default:

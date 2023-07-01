@@ -48,7 +48,7 @@ class HomeButtonSimple extends StatelessWidget {
                 Icon(
                   icon,
                   size: 48.0,
-                  color: Colors.black87,
+                  color: MyColors().primaryColor,
                 ),
                 SizedBox(width: width * 5),
                 Text(
@@ -57,7 +57,7 @@ class HomeButtonSimple extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: MyColors().primaryColor,
                   ),
                 ),
               ],

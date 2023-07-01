@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:notes_trove/Common/global_variables.dart';
+import 'package:notes_trove/Screens/all_courses_screen/widgets/add_course_widget.dart';
 import 'package:notes_trove/Screens/notes_screen/notes_screen.dart';
+import 'package:notes_trove/utils/colors.dart';
 
 import '../../Common/Widgets/app_bar.dart';
 
@@ -13,6 +15,7 @@ class CourseListScreen extends StatelessWidget {
     Notes(url: pdfUrl2, name: 'pdf 2'),
     Notes(url: pptUrl, name: 'ppt'),
   ];
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width / 100;
@@ -31,15 +34,14 @@ class CourseListScreen extends StatelessWidget {
             Course course = courses[index];
             return InkWell(
               onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CourseNotesScreen(
-                        notes: notesList, appbarTitle: course.name),
-                  )
-
-                  // CourseNotesScreen.routeName,
-                  // arguments: {notesList, course.name},
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CourseNotesScreen(
+                    notes: notesList,
+                    appbarTitle: course.name,
                   ),
+                ),
+              ),
               child: Column(
                 children: [
                   ListTile(
@@ -56,6 +58,18 @@ class CourseListScreen extends StatelessWidget {
           },
         ),
       ),
+      floatingActionButton: isItAdminMode
+          ? FloatingActionButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AddCourseScreen(),
+                );
+              },
+              child: Icon(Icons.add),
+              backgroundColor: MyColors().primaryColor,
+            )
+          : null,
     );
   }
 }

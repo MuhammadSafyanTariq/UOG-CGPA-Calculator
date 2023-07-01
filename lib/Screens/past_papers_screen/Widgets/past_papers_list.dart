@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:notes_trove/Common/Widgets/app_bar.dart';
 import 'package:notes_trove/Common/Widgets/web_view_screen.dart';
 import 'package:notes_trove/utils/colors.dart';
+import 'package:file_picker/file_picker.dart';
 
 class PastPapers extends StatefulWidget {
   final String appbarTitle;
   final List<Papers> notes;
 
-  const PastPapers({key, required this.notes, required this.appbarTitle})
+  const PastPapers({Key? key, required this.notes, required this.appbarTitle})
       : super(key: key);
 
   @override
@@ -15,6 +16,21 @@ class PastPapers extends StatefulWidget {
 }
 
 class _PastPapersState extends State<PastPapers> {
+  List<String> uploadedFiles = [];
+
+  Future<void> selectAndUploadFiles() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      allowMultiple: true,
+    );
+
+    if (result != null) {
+      List<String> fileNames = result.files.map((file) => file.name).toList();
+      setState(() {
+        uploadedFiles = fileNames;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width / 100;
@@ -45,6 +61,7 @@ class _PastPapersState extends State<PastPapers> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => WebViewScreen(
+                      title: notes.name,
                       url: notes.url,
                     ),
                   ),
@@ -53,6 +70,10 @@ class _PastPapersState extends State<PastPapers> {
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: selectAndUploadFiles,
+        child: Icon(Icons.upload_file),
       ),
     );
   }

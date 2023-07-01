@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:notes_trove/Common/Widgets/app_bar.dart';
 import 'package:notes_trove/Common/global_variables.dart';
+import 'package:notes_trove/Screens/QuizReminder/widgets/add_quiz_screen.dart';
 import 'package:notes_trove/Screens/QuizReminder/widgets/quiz_detail_screen.dart';
 
 import '../../utils/colors.dart';
@@ -157,6 +158,17 @@ class QuizAssignmentScreen extends StatelessWidget {
           },
         ),
       ),
+      floatingActionButton: isItAdminMode
+          ? FloatingActionButton(
+              child: Icon(Icons.add),
+              backgroundColor: MyColors().primaryColor,
+              onPressed: () => Navigator.pushNamed(
+                context,
+                AddQuizAssignmentScreen.routeName,
+                arguments: courses,
+              ),
+            )
+          : null,
     );
   }
 }

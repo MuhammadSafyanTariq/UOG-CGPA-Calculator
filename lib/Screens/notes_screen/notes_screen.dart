@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:notes_trove/Common/Widgets/app_bar.dart';
 import 'package:notes_trove/Common/Widgets/web_view_screen.dart';
+import 'package:notes_trove/Common/global_variables.dart';
+import 'package:notes_trove/Screens/notes_screen/widgets/single_note.dart';
 import 'package:notes_trove/utils/colors.dart';
 
 class CourseNotesScreen extends StatefulWidget {
@@ -8,14 +11,41 @@ class CourseNotesScreen extends StatefulWidget {
   final String appbarTitle;
   final List<Notes> notes;
 
-  const CourseNotesScreen({key, required this.notes, required this.appbarTitle})
-      : super(key: key);
+  const CourseNotesScreen({
+    Key? key,
+    required this.notes,
+    required this.appbarTitle,
+  }) : super(key: key);
 
   @override
   _CourseNotesScreenState createState() => _CourseNotesScreenState();
 }
 
 class _CourseNotesScreenState extends State<CourseNotesScreen> {
+  List<UploadedDocument> uploadedDocuments = [];
+
+  Future<void> _uploadDocuments() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      allowMultiple: true,
+    );
+
+    if (result != null && result.files.isNotEmpty) {
+      List<String> selectedFiles =
+          result.files.map((file) => file.path!).toList();
+
+      for (String filePath in selectedFiles) {
+        uploadedDocuments.add(
+          UploadedDocument(
+            courseName: widget.appbarTitle,
+            documentPath: filePath,
+          ),
+        );
+      }
+
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width / 100;
@@ -33,28 +63,16 @@ class _CourseNotesScreenState extends State<CourseNotesScreen> {
         itemCount: widget.notes.length,
         itemBuilder: (context, index) {
           final notes = widget.notes[index];
-          return Container(
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-            margin: EdgeInsets.only(bottom: height),
-            decoration: BoxDecoration(
-                color: MyColors().primaryColor10,
-                borderRadius: BorderRadius.circular(20)),
-            child: ListTile(
-              title: Text(notes.name),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => WebViewScreen(
-                      url: notes.url,
-                    ),
-                  ),
-                );
-              },
-            ),
-          );
+          return SingleNoteCard(title: notes.name, url: notes.url);
         },
       ),
+      floatingActionButton: isItAdminMode
+          ? FloatingActionButton(
+              onPressed: _uploadDocuments,
+              child: Icon(Icons.upload),
+              backgroundColor: MyColors().primaryColor,
+            )
+          : null,
     );
   }
 }
@@ -62,8 +80,19 @@ class _CourseNotesScreenState extends State<CourseNotesScreen> {
 class Notes {
   String url;
   String name;
+
   Notes({
     required this.url,
     required this.name,
+  });
+}
+
+class UploadedDocument {
+  String courseName;
+  String documentPath;
+
+  UploadedDocument({
+    required this.courseName,
+    required this.documentPath,
   });
 }
