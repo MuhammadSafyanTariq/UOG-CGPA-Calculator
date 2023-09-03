@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:notes_trove/Screens/CGPA_calculator/CGPA_calculator.dart';
 
 import '../Common/global_variables.dart';
-import 'auth_screens/sign_in_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String routeName = '/welcome-screen';
@@ -24,7 +24,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void navigateToNextScreen() {
     Timer(const Duration(seconds: 2), () {
       Navigator.pushNamedAndRemoveUntil(
-          context, SignInScreen.routeName, (route) => false);
+          context, CGPACalculatorScreen.routeName, (route) => false);
     });
   }
 
@@ -36,7 +36,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         child: Image.asset(
           appLogo,
           fit: BoxFit.contain,
-          height: 200,
+          height: 400,
         ),
       ),
     );

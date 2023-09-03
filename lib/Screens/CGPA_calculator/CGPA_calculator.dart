@@ -19,33 +19,39 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
   double previousCGPA = 0.0;
   int totalCreditHours = 0;
   double calculatedCGPA = 0.0;
+  double calculatedCGPARounded = 0.0;
+
+  void shareApp() {
+    // Share.share('Check out this awesome app! https://example.com');
+  }
 
   List<String> gradeOptions = [
-    'A+',
-    'A',
-    'B+',
-    'B',
-    'B-',
-    'C+',
-    'C',
-    'D',
+    'A+ (84.5 or more)',
+    'A (79.5 or more)',
+    'B+ (74.5 or more)',
+    'B (69.5 or more)',
+    'B- (64.5 or more)',
+    'C+ (59.5 or more)',
+    'C (54.5 or more)',
+    'D (49.5 or more)',
     'F',
   ];
 
   Map<String, double> gradeValues = {
-    'A+': 4.00,
-    'A': 3.70,
-    'B+': 3.40,
-    'B': 3.00,
-    'B-': 2.50,
-    'C+': 2.00,
-    'C': 1.50,
-    'D': 1.00,
+    'A+ (84.5 or more)': 4.00,
+    'A (79.5 or more)': 3.70,
+    'B+ (74.5 or more)': 3.40,
+    'B (69.5 or more)': 3.00,
+    'B- (64.5 or more)': 2.50,
+    'C+ (59.5 or more)': 2.00,
+    'C (54.5 or more)': 1.50,
+    'D (49.5 or more)': 1.00,
     'F': 0.00,
   };
 
   @override
   Widget build(BuildContext context) {
+    print('------------------------&{}');
     MyColors myColors = MyColors();
 
     var width = MediaQuery.of(context).size.width / 100;
@@ -61,13 +67,37 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
           ),
         ),
         elevation: 0,
+        centerTitle: true,
         title: const Text(
-          'CGPA Calculator',
+          'UOG CGPA Calculator',
           style: TextStyle(
             color: Colors.white,
             fontSize: 24,
           ),
         ),
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              // Handle the selected option here
+              if (value == 'share') {
+                // Add code to share your app here
+                shareApp();
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem<String>(
+                  value: 'share',
+                  child: ListTile(
+                    leading: Icon(Icons.share),
+                    title: Text('Share App'),
+                  ),
+                ),
+                // Add more options as needed
+              ];
+            },
+          ),
+        ],
         toolbarHeight: height * 9,
       ),
       body: SingleChildScrollView(
@@ -171,48 +201,21 @@ class _CGPACalculatorScreenState extends State<CGPACalculatorScreen> {
             CustomButton(
               text: 'Calculate CGPA',
               onPressed: () {
-                if (creditHours.contains(0)) {
-                  showDialog(
-                    context: context,
-                    builder: (context) => DialogBox(
-                      icon: Icons.warning_rounded,
-                      color: Colors.red,
-                      text: 'Something is missing!',
-                      subtext: "Please enter the credit hours for all courses",
-                    ),
-                  );
-                } else {
-                  calculateCGPA();
+                calculateCGPA();
 
-                  showDialog(
-                    context: context,
-                    builder: (context) => DialogBox(
-                      color: Colors.black,
-                      icon: FontAwesomeIcons.faceSmile,
-                      text: 'Your CGPA is',
-                      subtext: '$calculatedCGPA',
-                    ),
-                  );
-                }
+                showDialog(
+                  context: context,
+                  builder: (context) => DialogBox(
+                    color: Colors.black,
+                    icon: FontAwesomeIcons.faceSmile,
+                    text: 'Your CGPA is',
+                    subtext: '${calculatedCGPA.toStringAsFixed(4)}',
+                  ),
+                );
               },
               context: context,
             ),
             const SizedBox(height: 16.0),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     Text(
-            //       'Calculated CGPA :    ',
-            //       style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
-            //       textAlign: TextAlign.center,
-            //     ),
-            //     Text(
-            //       '$calculatedCGPA',
-            //       style: TextStyle(fontSize: 18.0),
-            //       textAlign: TextAlign.center,
-            //     ),
-            //   ],
-            // ),
           ],
         ),
       ),

@@ -40,7 +40,8 @@ dependencies:
   font_awesome_flutter: ^10.4.0
   http: ^0.13.0
   path_provider: ^2.0.15
-  velocity_x: ^4.1.0
+  printing: ^5.11.0
+  rename: ^2.1.1
   webview_flutter: ^4.2.2
 
 dev_dependencies:

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyColors {
-  Color get primaryColor => const Color.fromRGBO(0, 68, 109, 1);
+  Color get primaryColor => Color(0xFF00446D);
   Color get primaryColor2 => const Color.fromRGBO(47, 196, 226, 1);
   Color get primaryColor210 => const Color.fromRGBO(47, 196, 226, 0.1);
   Color get primaryColor10 => const Color.fromRGBO(0, 68, 109, 0.1);
